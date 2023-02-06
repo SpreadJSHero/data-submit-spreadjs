@@ -1,0 +1,12 @@
+body{
+  height: 100vh;
+  margin: 0;
+  padding: 0
+}
+
+#app,.common-layout,.el-container{
+  height: 100%;
+}
+.el-main{
+  padding: 0 !important;
+}

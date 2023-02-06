@@ -1,0 +1,40 @@
+{
+  "name": "data-submit-spreadjs",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@element-plus/icons-vue": "^2.0.10",
+    "@grapecity/spread-excelio": "16.0.1",
+    "@grapecity/spread-sheets": "16.0.1",
+    "@grapecity/spread-sheets-barcode": "16.0.1",
+    "@grapecity/spread-sheets-charts": "16.0.1",
+    "@grapecity/spread-sheets-designer": "16.0.1",
+    "@grapecity/spread-sheets-designer-resources-cn": "16.0.1",
+    "@grapecity/spread-sheets-designer-vue": "16.0.1",
+    "@grapecity/spread-sheets-io": "16.0.1",
+    "@grapecity/spread-sheets-languagepackages": "16.0.1",
+    "@grapecity/spread-sheets-pdf": "16.0.1",
+    "@grapecity/spread-sheets-pivot-addon": "16.0.1",
+    "@grapecity/spread-sheets-print": "16.0.1",
+    "@grapecity/spread-sheets-resources-zh": "16.0.1",
+    "@grapecity/spread-sheets-shapes": "16.0.1",
+    "@grapecity/spread-sheets-tablesheet": "16.0.1",
+    "element-plus": "^2.2.28",
+    "unplugin-icons": "^0.15.2",
+    "vite-plugin-inspect": "^0.7.15",
+    "vue": "^3.2.45",
+    "vue-router": "^4.1.6"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^4.0.0",
+    "unplugin-auto-import": "^0.13.0",
+    "unplugin-vue-components": "^0.23.0",
+    "vite": "^4.0.0"
+  }
+}
