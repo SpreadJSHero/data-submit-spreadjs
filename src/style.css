@@ -5,7 +5,7 @@ body{
 }
 
 #app,.common-layout,.el-container{
-  height: 100%;
+  height: calc(100vh - 100px);
 }
 .el-main{
   padding: 0 !important;

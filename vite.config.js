@@ -7,9 +7,8 @@ import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import Inspect from 'vite-plugin-inspect'
-
 const pathSrc = path.resolve(__dirname, 'src')
-
+let env = process.env.NODE_ENV
 export default defineConfig({
   server:{
     hmr: true,
@@ -20,6 +19,7 @@ export default defineConfig({
       '@': pathSrc,
     },
   },
+  base: env == "production" ? "/spreadjs/demos/cases" : "",
   plugins: [
     Vue(),
     AutoImport({
@@ -63,4 +63,7 @@ export default defineConfig({
 
     Inspect(),
   ],
+  optimizeDeps: {
+    exclude: ["@grapecity/*"]
+  }
 })
