@@ -3,7 +3,7 @@
         <span>{{detail}}</span>
         <template #footer>
             <span class="dialog-footer">
-                <el-button @click="cancelEvent">取消</el-button>
+                <el-button v-if="showCancel" @click="cancelEvent">取消</el-button>
                 <el-button type="primary" @click="confirmEvent">
                     确认
                 </el-button>
@@ -20,6 +20,7 @@ export default defineComponent({
         title: String,
         detail: String,
         hasShow: Boolean,
+        showCancel: true,
         confirmEvent:{
             type: Function
         },

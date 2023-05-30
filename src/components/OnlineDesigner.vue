@@ -85,6 +85,7 @@ export default defineComponent({
       this.spread = this.designer.getWorkbook();
       loadTemplate(this.spread, this.router.currentRoute.value.query.template, this.designer)
       this.router.currentRoute.value.query.template === "customDesigner" ? Intro.customDesignIntro(this.designer) : Intro.designerIntro(this.designer);
+      document.querySelector('li[data-id="fill-custom"]').click()
 
       // 路由监听，切换文件
       watch(

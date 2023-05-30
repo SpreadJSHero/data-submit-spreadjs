@@ -12,6 +12,16 @@
         <!-- <el-menu-item v-for="item in operateSteps" :key="item.router" :index="item.router"> -->
         {{item.label}}
         </el-menu-item>
+        <el-menu-item v-if="$route.path=='/fill'" disabled>
+            <div class="color-gray">    
+                当前为普通用户看到的页面，仅可以做填报操作，无其他权限，<a class="color-blue" href="">操作视频</a>
+            </div>
+        </el-menu-item>
+        <el-menu-item disabled v-else>
+            <div class="color-gray">
+                当前为管理员看到的页面，可以保存模板、下发任务和查看汇总，<a class="color-blue" href="">操作视频</a>
+            </div>
+        </el-menu-item>
     </el-menu>
 </template>
 <script>
@@ -33,7 +43,7 @@ export default defineComponent({
                     template: router.currentRoute.value.query.template,
                     user: router.currentRoute.value.query.user
                 }
-            })
+            })            
         }
 
         return {
@@ -80,5 +90,13 @@ export default defineComponent({
 .el-menu-item.is-disabled{
     opacity: 1;
     cursor: default;
+}
+.color-gray{
+    color: #aaa;
+    display: flex;
+    align-items: center;
+}
+.color-blue {
+    color: #0ff00f !important;
 }
 </style>

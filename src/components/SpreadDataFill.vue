@@ -20,7 +20,7 @@
     </el-col>
   </el-row>
   <el-divider />
-  <common-dialog :title="title" :detail="detail" :hasShow='hasShow' :confirmEvent="closeWindow" :cancelEvent="closeDialog"></common-dialog>
+  <common-dialog :title="title" :detail="detail" :hasShow='hasShow' :showCancel="false" :confirmEvent="closeDialog"></common-dialog>
   <gc-spread-sheets @workbookInitialized="initWorkbook"></gc-spread-sheets>
 </template>
 
@@ -52,7 +52,7 @@ export default defineComponent({
     let router = useRouter()
     const reactiveData = reactive({
       title: "保存成功",
-      detail: "是否跳转至预览界面查看填报进度?",
+      detail: "请切换至管理员界面查看填报进度",
       hasShow: false
     })
     // 路由监听，切换文件
@@ -108,8 +108,8 @@ export default defineComponent({
       let queryStr = ""
       Object.keys(query).forEach(key => {
         queryStr += key + "=" + query[key] + "&"
-      })
-      this.mobileHref = window.location.href.split("#")[0] + "/#/mobileFill?" + queryStr
+      })      
+      this.mobileHref = window.location.href.split("#")[0] + "#/mobileFill?" + queryStr
       QRCode.toCanvas(qrCanvas, this.mobileHref)
     },
     async initWorkbook(spread) {
@@ -128,8 +128,7 @@ export default defineComponent({
       } else {
         let result = await saveRecord(template, user, this.spread.getActiveSheet().getDataSource().getSource())
         if (result == SUCCESS) {
-          alert(result)
-          this.reactiveData.hasShow = true
+          this.hasShow = true
         } else {
           ElMessage({ message: '保存失败', type: 'error' })
         }
