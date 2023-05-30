@@ -53,6 +53,7 @@ export default defineComponent({
                     template: event
                 }
             })
+            document.querySelector('li[data-id="fill-custom"]').click()
         }
 
         return ({

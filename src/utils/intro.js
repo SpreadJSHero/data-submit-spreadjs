@@ -102,7 +102,7 @@ Intro.designerIntro = function (designer) {
                 closeBtnText: '下一步'
             },
             callBefore: () => {
-                document.querySelectorAll('[data-id="custom"]')[0].click();
+                document.querySelectorAll('[data-id="fill-custom"]')[0].click();
             }
         },
         {
@@ -191,33 +191,12 @@ Intro.customDesignIntro = function (designer) {
                 closeBtnText: '开始体验'
             },
             callBefore: () => {
-                document.querySelectorAll('[data-id="custom"]')[0].click();
+                document.querySelectorAll('[data-id="fill-custom"]')[0].click();
             },
             callAfter: () => {
                 localStorage.setItem('idCustomerDesignIntro', true)
             }
         },
-        // {
-        //     element: '.distribute-icon',
-        //     popover: {
-        //         title: '下发填报任务1',
-        //         description: '点击下发任务，通过个人连接完成填报。',
-        //         position: 'bottom',
-        //         closeBtnText: '下一步'
-        //     },
-        //     callBefore: () => {
-        //         document.querySelectorAll('[data-id="custom"]')[0].click();
-        //     }
-        // },
-        // {
-        //     element: '.checksummary-icon',
-        //     popover: {
-        //         title: '查看汇总数据1',
-        //         description: '点击跳转数据汇总页面查看所有填报数据。',
-        //         position: 'right',
-        //         closeBtnText: '开始体验'
-        //     }
-        // },
     ]
 
     createIntro1(steps, 0, designer)

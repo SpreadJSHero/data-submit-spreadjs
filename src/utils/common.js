@@ -38,8 +38,8 @@ function getPreivewConfig(distributeVisible, router) {
 
     let config = JSON.parse(JSON.stringify(GC.Spread.Sheets.Designer.DefaultConfig));
     config.ribbon.push({
-        id: "custom",
-        text: "定制按钮",
+        id: "fill-custom",
+        text: "填报命令（定制按钮）",
         buttonGroups: [{
             label: "操作",
             thumbnailClass: "ribbon-thumbnail-editing",
