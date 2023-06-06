@@ -22,6 +22,11 @@
                 </el-icon>
                 <span>{{ item.label }}</span>
             </el-menu-item>
+            <div class="github-box">
+                <a href="https://github.com/SpreadJSHeor/data-submit-spreadjs" target="_blank">
+                    <img width="40" src="../assets/github.png" />
+                </a>
+            </div>
         </el-menu>
     </el-aside>
 </template>
@@ -68,6 +73,13 @@ export default defineComponent({
 .collapse-area{
     height: 40px;
     line-height: 40px;
+}
+.github-box {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
 }
 .switch-icon {
     width: 20px;
