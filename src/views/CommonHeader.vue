@@ -21,8 +21,15 @@
             </div>
         </div>
         <div class="header__buttons">
-            <a href="https://www.grapecity.com.cn/developer/spreadjs/download" class="button"> 立即试用 </a>
+            <a href="https://www.grapecity.com.cn/applyonline" class="button applyonline" target="_blank">预约技术顾问</a>
+            <a href="https://www.grapecity.com.cn/developer/spreadjs/download" class="button" target="_blank"> 立即试用 </a>
         </div>
     </header>
 </template>
 <style src="../assets/doc.css"></style>
+<style>
+.applyonline {
+    background-color: #941966;
+    color: #fff !important;
+}
+</style>

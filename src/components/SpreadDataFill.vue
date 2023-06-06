@@ -1,6 +1,6 @@
 <template>
   <el-row class="h-40" align="middle" justify="end">
-    <el-popover placement="bottom" :width="200" hide-after="50" trigger="click">
+    <el-popover placement="bottom" :width="200" hide-after="50" trigger="hover">
       <template #reference>
         <el-button type="success" class="save-button" style="margin-right: 16px">在移动端填报</el-button>
       </template>
