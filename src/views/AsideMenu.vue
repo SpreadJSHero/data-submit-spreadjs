@@ -23,7 +23,7 @@
                 <span>{{ item.label }}</span>
             </el-menu-item>
             <div class="github-box">
-                <a href="https://github.com/SpreadJSHeor/data-submit-spreadjs" target="_blank">
+                <a href="https://github.com/SpreadJSHero/data-submit-spreadjs" target="_blank">
                     <img width="40" src="../assets/github.png" />
                 </a>
             </div>

@@ -62,7 +62,7 @@ function getPreivewConfig(distributeVisible, router) {
             bigButton: true,
             commandName: "saveTemplate",
             execute: function (designer) {
-                let binding = designer.getData("treeNodeFromJson") || designer.getData("oldTreeNodeFromJson") || designer.getData("updatedTreeNode")
+                let binding =  designer.getData("updatedTreeNode") || designer.getData("treeNodeFromJson") || designer.getData("oldTreeNodeFromJson")
                 let json = designer.getWorkbook().toJSON()
                 json.designerBindingPathSchema = JSON.parse(binding)
                 let key = 'temp_' + router.currentRoute.value.query.template
