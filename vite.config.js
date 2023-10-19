@@ -10,7 +10,7 @@ import Inspect from 'vite-plugin-inspect'
 const pathSrc = path.resolve(__dirname, 'src')
 let env = process.env.NODE_ENV
 export default defineConfig({
-  server:{
+  server: {
     hmr: true,
     port: 9000
   },

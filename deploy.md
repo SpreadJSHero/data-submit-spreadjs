@@ -1,0 +1,1 @@
+如果升级了版本，需要将common.js的setVersion中的版本号做出对应修改

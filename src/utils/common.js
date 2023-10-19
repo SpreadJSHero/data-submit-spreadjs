@@ -3,7 +3,6 @@ import { ElMessage } from "element-plus"
 import { getRecord, getTemplateReocords, clearAll } from './dbManager'
 import baseSetting from "../config/baseSetting"
 import localforage from "localforage"
-
 const initialPrefix = "initial"
 
 function getImageBase64(src) {
@@ -113,7 +112,7 @@ function getPreivewConfig(distributeVisible, router) {
 // 加载文件
 const loadTemplate = async (spread, fileName, designer) => {
     let templateStr = await BusinessType.getTemplate(fileName)
-    let template = JSON.parse(templateStr)
+    let template = JSON.parse(templateStr)    
     spread.fromJSON(template)
     if (!designer) {
         return;
@@ -292,10 +291,15 @@ const executeSummary = async (spread, router) => {
     }
 }
 
+function setVersion() {
+    localforage.setItem("version", "16.2.2")
+}
+
 export {
     getImageBase64,
     getPreivewConfig,
     loadTemplate,
     initialTemplateData,
-    executeSummary
+    executeSummary,
+    setVersion
 }

@@ -4,11 +4,11 @@ import HttpUtils from '../utils/httpUtils'
 
 
 
-function BusinessType(){
+function BusinessType() {
 
 }
 
-BusinessType.getList =  function(){
+BusinessType.getList = function () {
     return baseSetting.businessType;
 }
 
@@ -18,14 +18,17 @@ BusinessType.getList =  function(){
 
 const _modelPrefix = "temp_"
 
-BusinessType.getTemplate = async function(value){
-    try{
+BusinessType.getTemplate = async function (value) {
+    try {
         let templateKey = _modelPrefix + value;
         let localTemplate = await localForage.getItem(templateKey);
-        if(localTemplate) {
+        let currentVersion = await localForage.getItem("version");
+        let templateJson = JSON.parse(localTemplate)
+        console.log("currentVersion=", currentVersion)
+        if (localTemplate && templateJson.version == currentVersion) {
             return localTemplate
         }
-        let defaultTemplate = await HttpUtils.get("./templates/" + value + ".json" , {responseType: "json"});
+        let defaultTemplate = await HttpUtils.get("./templates/" + value + ".json", { responseType: "json" });
         // change blob type for open
         // defaultTemplate = defaultTemplate.slice(0, defaultTemplate.size, "application/zip");
         defaultTemplate = JSON.stringify(defaultTemplate);
@@ -33,7 +36,7 @@ BusinessType.getTemplate = async function(value){
         localForage.setItem(templateKey, defaultTemplate);
         return defaultTemplate
     }
-    catch (e){
+    catch (e) {
         console.error(e)
         return null
     }

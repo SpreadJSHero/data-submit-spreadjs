@@ -27,8 +27,8 @@
 <script>
 import { reactive, toRefs, ref, unref, defineComponent } from 'vue'
 import { useRouter } from 'vue-router'
-import { loadTemplate, initialTemplateData } from "../utils/common"
-import { saveRecord, getRecord } from "../utils/dbManager"
+import { loadTemplate, initialTemplateData, setVersion } from "../utils/common"
+import { saveRecord } from "../utils/dbManager"
 import { ElMessage } from 'element-plus';
 import commonDialog from "./commonDialog.vue"
 import { SUCCESS } from "../config/constantValue"
@@ -82,6 +82,7 @@ export default defineComponent({
     }
   },
   mounted() {
+    setVersion()
     this.initQrCode()
     this.initWorkbook()
   },
@@ -101,7 +102,7 @@ export default defineComponent({
       let queryStr = ""
       Object.keys(query).forEach(key => {
         queryStr += key + "=" + query[key] + "&"
-      })      
+      })
       this.mobileHref = window.location.href.split("#")[0] + "#/mobileFill?" + queryStr
       QRCode.toCanvas(qrCanvas, this.mobileHref)
     },

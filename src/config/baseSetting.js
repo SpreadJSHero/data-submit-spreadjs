@@ -12,10 +12,6 @@ const businessType = [
     value: 'limsData',
     label: '实验室数据采集',
     icon: 'Odometer',
-  },{
-    value: 'taskSplit',
-    label: '任务拆分（移动端）',
-    icon: 'Files',
   }, {
     value: 'customDesigner',
     label: '自定义设计 ',

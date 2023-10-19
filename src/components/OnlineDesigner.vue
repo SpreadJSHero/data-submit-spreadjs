@@ -19,8 +19,8 @@
   </el-dialog>
 </template>
 <script>
-import { defineComponent, reactive, ref, watch } from 'vue'
-import { getPreivewConfig, loadTemplate } from "../utils/common"
+import { defineComponent, ref, watch } from 'vue'
+import { getPreivewConfig, loadTemplate, setVersion } from "../utils/common"
 import baseSetting from "../config/baseSetting"
 import { useRouter } from "vue-router"
 import localforage from "localforage";
@@ -55,6 +55,8 @@ export default defineComponent({
     }
   },
   mounted() {
+    console.log(this.users)
+    setVersion()
     this.initDesigner()
     this.initUser()
   },
