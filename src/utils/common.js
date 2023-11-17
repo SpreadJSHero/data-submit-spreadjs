@@ -295,8 +295,13 @@ const executeSummary = async (spread, router) => {
     }
 }
 
-function setVersion() {
-    localforage.setItem("version", "16.2.6")
+async function setVersion() {
+    let version = await localforage.getItem("version")
+    let newVersion = "16.2.6"
+    if(version != newVersion) {
+        await localforage.clear()
+        localforage.setItem("version", newVersion)
+    }
 }
 
 export {

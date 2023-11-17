@@ -23,9 +23,8 @@ BusinessType.getTemplate = async function (value) {
         let templateKey = _modelPrefix + value;
         let localTemplate = await localForage.getItem(templateKey);
         let currentVersion = await localForage.getItem("version");
-        let templateJson = JSON.parse(localTemplate)
         console.log("currentVersion=", currentVersion)
-        if (localTemplate && templateJson.version == currentVersion) {
+        if (localTemplate ) {
             return localTemplate
         }
         let defaultTemplate = await HttpUtils.get("./templates/" + value + ".json", { responseType: "json" });
