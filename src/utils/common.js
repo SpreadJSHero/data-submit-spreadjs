@@ -61,7 +61,7 @@ function getPreivewConfig(distributeVisible, router) {
             bigButton: true,
             commandName: "saveTemplate",
             execute: function (designer) {
-                let binding =  designer.getData("updatedTreeNode") || designer.getData("treeNodeFromJson") || designer.getData("oldTreeNodeFromJson")
+                let binding = designer.getData("updatedTreeNode") || designer.getData("treeNodeFromJson") || designer.getData("oldTreeNodeFromJson")
                 let json = designer.getWorkbook().toJSON()
                 json.designerBindingPathSchema = JSON.parse(binding)
                 let key = 'temp_' + router.currentRoute.value.query.template
@@ -112,7 +112,7 @@ function getPreivewConfig(distributeVisible, router) {
 // 加载文件
 const loadTemplate = async (spread, fileName, designer) => {
     let templateStr = await BusinessType.getTemplate(fileName)
-    let template = JSON.parse(templateStr)    
+    let template = JSON.parse(templateStr)
     spread.fromJSON(template)
     if (!designer) {
         return;
@@ -157,18 +157,20 @@ const initialTemplateData = async (spread, router) => {
             let dr = table.dataRange()
             data.sheet.getRange(dr.row, dr.col, dr.rowCount, dr.colCount).locked(false)
             data.sheet.copyTo(dr.row, dr.col, dr.row + data.row + 1, dr.col, data.count, dr.colCount, GC.Spread.Sheets.CopyToOptions.style)
+
+            for (let col = dr.col; col < dr.col + dr.colCount;) {
+                let span = data.sheet.getSpan(dr.row + data.row, col)
+                if (span) {
+                    for (let rc = 1; rc <= data.count; rc++) {
+                        data.sheet.addSpan(dr.row + data.row + rc, col, span.rowCount, span.colCount)
+                        col = col + span.colCount
+                    }
+                } else {
+                    col++
+                }
+            }
+
         });
-        sheet.tables.all().forEach(table => {
-            let dr = table.dataRange()
-            let path = table.bindingPath()
-            if(path && !initialData[path]) {
-                initialData[path] = [{}]
-            }
-            sheet.getRange(dr.row, dr.col, dr.rowCount, dr.colCount).locked(false)
-            for (let curRow = dr.row + 1; curRow < dr.row + dr.rowCount; curRow++) {                
-                sheet.copyTo(dr.row, dr.col, curRow, dr.col, 1, dr.colCount, GC.Spread.Sheets.CopyToOptions.style)
-            }
-        })
         sheet.bind(GC.Spread.Sheets.Events.ValueChanged, function (e, info) {
             let curSheet = info.sheet
             let isValid = curSheet.isValid(info.row, info.col, info.newValue)
@@ -178,8 +180,44 @@ const initialTemplateData = async (spread, router) => {
                 ElMessage.error(validator.errorMessage())
             }
         })
+        sheet.tables.all().forEach(table => {
+            let dr = table.dataRange()
+            let path = table.bindingPath()
+            if (path && !initialData[path]) {
+                initialData[path] = [{}]
+            }
+            sheet.getRange(dr.row, dr.col, dr.rowCount, dr.colCount).locked(false)
+            for (let curRow = dr.row + 1; curRow < dr.row + dr.rowCount; curRow++) {
+                sheet.copyTo(dr.row, dr.col, curRow, dr.col, 1, dr.colCount, GC.Spread.Sheets.CopyToOptions.style)
+            }
+        })
         let source = new GC.Spread.Sheets.Bindings.CellBindingSource(initialData)
         sheet.setDataSource(source)
+        sheet.tables.all().forEach(table => {
+            let dr = table.dataRange()
+            let path = table.bindingPath()
+            if (path && !initialData[path]) {
+                initialData[path] = [{}]
+            }
+            sheet.getRange(dr.row, dr.col, dr.rowCount, dr.colCount).locked(false)
+            for (let curRow = dr.row + 1; curRow < dr.row + dr.rowCount; curRow++) {
+                sheet.copyTo(dr.row, dr.col, curRow, dr.col, 1, dr.colCount, GC.Spread.Sheets.CopyToOptions.style)
+            }
+
+            for (let col = dr.col; col < dr.col + dr.colCount;) {
+                let span = sheet.getSpan(dr.row, col)
+                console.log(span)
+                if (span) {
+                    for (let rc = dr.row + 1; rc < dr.row + dr.rowCount; rc++) {
+                        console.log(rc, col, span.rowCount, span.colCount)
+                        sheet.addSpan(rc, col, span.rowCount, span.colCount)
+                    }
+                    col = col + span.colCount
+                } else {
+                    col++
+                }
+            }
+        })
     }
 }
 
@@ -298,7 +336,7 @@ const executeSummary = async (spread, router) => {
 async function setVersion() {
     let version = await localforage.getItem("version")
     let newVersion = "16.2.6"
-    if(version != newVersion) {
+    if (version != newVersion) {
         await localforage.clear()
         localforage.setItem("version", newVersion)
     }
