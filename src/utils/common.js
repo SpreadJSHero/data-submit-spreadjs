@@ -152,16 +152,18 @@ const initialTemplateData = async (spread, router) => {
         }
 
         let sheet = spread.getActiveSheet()
-        let source = new GC.Spread.Sheets.Bindings.CellBindingSource(initialData)
         spread.bind(GC.Spread.Sheets.Events.TableRowsChanged, function (e, data) {
             let table = data.table
             let dr = table.dataRange()
             data.sheet.getRange(dr.row, dr.col, dr.rowCount, dr.colCount).locked(false)
             data.sheet.copyTo(dr.row, dr.col, dr.row + data.row + 1, dr.col, data.count, dr.colCount, GC.Spread.Sheets.CopyToOptions.style)
         });
-        sheet.setDataSource(source)
         sheet.tables.all().forEach(table => {
             let dr = table.dataRange()
+            let path = table.bindingPath()
+            if(path && !initialData[path]) {
+                initialData[path] = [{}]
+            }
             sheet.getRange(dr.row, dr.col, dr.rowCount, dr.colCount).locked(false)
             for (let curRow = dr.row + 1; curRow < dr.row + dr.rowCount; curRow++) {                
                 sheet.copyTo(dr.row, dr.col, curRow, dr.col, 1, dr.colCount, GC.Spread.Sheets.CopyToOptions.style)
@@ -176,6 +178,8 @@ const initialTemplateData = async (spread, router) => {
                 ElMessage.error(validator.errorMessage())
             }
         })
+        let source = new GC.Spread.Sheets.Bindings.CellBindingSource(initialData)
+        sheet.setDataSource(source)
     }
 }
 

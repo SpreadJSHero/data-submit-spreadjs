@@ -120,7 +120,8 @@ export default defineComponent({
       if (!template || !user) {
         ElMessage({ message: '模板或用户名称不存在', type: 'error' })
       } else {
-        let result = await saveRecord(template, user, this.spread.getActiveSheet().getDataSource().getSource())
+        let source = this.spread.getActiveSheet().getDataSource().getSource()
+        let result = await saveRecord(template, user, source)
         if (result == SUCCESS) {
           this.hasShow = true
         } else {
