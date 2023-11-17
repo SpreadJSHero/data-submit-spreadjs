@@ -296,7 +296,7 @@ const executeSummary = async (spread, router) => {
 }
 
 function setVersion() {
-    localforage.setItem("version", "16.2.2")
+    localforage.setItem("version", "16.2.6")
 }
 
 export {
