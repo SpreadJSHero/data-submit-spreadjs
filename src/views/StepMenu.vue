@@ -14,12 +14,12 @@
         </el-menu-item>
         <el-menu-item v-if="$route.path=='/fill'" disabled>
             <div class="color-gray">    
-                当前为普通用户看到的页面，仅可以做填报操作，无其他权限，<a class="color-blue" target="_blank" href="https://videos.grapecity.com.cn/SpreadJS/online/demos/data-fill-sample-introduction.mp4">操作视频</a>
+                当前为普通用户看到的页面，仅可以做填报操作，无其他权限，<router-link class="color-blue" target="_blank" to="/video">操作视频</router-link>
             </div>
         </el-menu-item>
         <el-menu-item disabled v-else>
             <div class="color-gray">
-                当前为管理员看到的页面，可以保存模板、下发任务和查看汇总，<a class="color-blue" target="_blank" href="https://videos.grapecity.com.cn/SpreadJS/online/demos/data-fill-sample-introduction.mp4">操作视频</a>
+                当前为管理员看到的页面，可以保存模板、下发任务和查看汇总，<router-link class="color-blue" target="_blank" to="/video">操作视频</router-link>
             </div>
         </el-menu-item>
     </el-menu>

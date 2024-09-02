@@ -25,6 +25,9 @@ const routes = [
     }, {
         path: "/mobileFill",
         component: () => import("../views/MobileView.vue")
+    }, {
+        path: "/video",
+        component: () => import("../views/video.vue")
     }
 ]
 
