@@ -26,6 +26,8 @@
         </div>
     </header>
 </template>
+<style src="../assets/fontawsome.css"></style>
+<style src="../assets/highlight.css"></style>
 <style src="../assets/doc.css"></style>
 <style>
 .applyonline {
