@@ -5,7 +5,7 @@
 <script>
 import { defineComponent } from 'vue'
 import { useRouter } from 'vue-router'
-import { getSummaryData } from "../utils/common"
+import { getSummaryData, getReportConfig, loadReport } from "../utils/common"
 
 export default defineComponent({
   setup() {
@@ -26,10 +26,13 @@ export default defineComponent({
   },
   methods: {
     async initWorkbook() {
-      this.designer = new GC.Spread.Sheets.Designer.Designer("designer-container")
+      let config = getReportConfig(this.designer, this.router)
+      this.designer = new GC.Spread.Sheets.Designer.Designer("designer-container", config)
       this.$nextTick(()=>{
         this.designer.refresh()
       })
+      await loadReport(this.designer, this.router.currentRoute.value.query.template);
+
       this.spread = this.designer.getWorkbook();
       let data = await getSummaryData(this.router.currentRoute.value.query.template)
 

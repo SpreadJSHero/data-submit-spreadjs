@@ -351,7 +351,7 @@ const executeSummary = async (spread, router) => {
 }
 
 const getSummaryData = async (template) => {
-    return new Promise( async resolve=>{
+    return new Promise(async resolve => {
         if (!template) {
             ElMessage({ message: '汇总模板不存在', type: 'error' })
             resolve([])
@@ -376,6 +376,59 @@ async function setVersion() {
     }
 }
 
+function getReportConfig(desinger, router) {
+    let config = JSON.parse(JSON.stringify(GC.Spread.Sheets.Designer.DefaultConfig));
+    let reportRibbon = config.ribbon.find(r => r.id === 'reportSheetDesign');
+    console.log(reportRibbon)
+
+    reportRibbon.buttonGroups.unshift({
+        label: "操作",
+        thumbnailClass: "ribbon-thumbnail-editing",
+        commandGroup: {
+            children: ["saveReport"]
+        }
+    })
+
+    config.commandMap = {
+        saveReport: {
+            title: "保存报表模板",
+            text: "保存报表",
+            iconClass: "save-template-icon",
+            bigButton: true,
+            commandName: "saveReport",
+            execute: function (designer) {
+                let spread = designer.getWorkbook();
+                spread.save(function (blob) {
+                    let key = 'report_' + router.currentRoute.value.query.template
+                    localforage.setItem(key, blob)
+                    ElMessage.success("保存成功！")
+                })
+
+            }
+        }
+    };
+
+    return config;
+}
+
+async function loadReport(designer, reportName) {
+
+    return new Promise(async resolve => {
+        let key = 'report_' + reportName
+        let blob = await localforage.getItem(key)
+        if (blob) {
+            designer.getWorkbook().open(blob, function () {
+                ElMessage.success("加载报表成功！")
+                resolve();
+            }, function(){
+                resolve();
+            })
+        }
+        resolve();
+    });
+
+}
+
 export {
     getImageBase64,
     getPreivewConfig,
@@ -383,5 +436,7 @@ export {
     initialTemplateData,
     executeSummary,
     getSummaryData,
-    setVersion
+    setVersion,
+    getReportConfig,
+    loadReport
 }
