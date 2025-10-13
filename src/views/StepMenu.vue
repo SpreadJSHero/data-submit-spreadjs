@@ -8,7 +8,7 @@
         active-text-color="#ffd04b" 
         @select="handleStepSelect"
     >
-        <el-menu-item v-for="item in operateSteps" :key="item.router" :index="item.router" disabled=true>
+        <el-menu-item v-for="item in operateSteps" :key="item.router" :index="item.router" disabled>
         <!-- <el-menu-item v-for="item in operateSteps" :key="item.router" :index="item.router"> -->
         {{item.label}}
         </el-menu-item>

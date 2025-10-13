@@ -1,5 +1,6 @@
 import Driver from "driver.js";
 import "driver.js/dist/driver.min.css"
+import { de } from "element-plus/es/locales.mjs";
 
 function Intro() {
 
@@ -72,7 +73,7 @@ Intro.designerIntro = function (designer) {
             }
         },
         {
-            element: '.ribbon',
+            element: '.gc-designer-ribbon',
             popover: {
                 className: 'first-step-popover-class',
                 title: '模板设计',
@@ -90,7 +91,7 @@ Intro.designerIntro = function (designer) {
                 closeBtnText: '下一步'
             },
             callBefore: () => {
-                document.querySelectorAll('[data-id="data"]')[0].click();
+                designer.activeRibbonTab('data');
             }
         },
         {
@@ -102,7 +103,7 @@ Intro.designerIntro = function (designer) {
                 closeBtnText: '下一步'
             },
             callBefore: () => {
-                document.querySelectorAll('[data-id="fill-custom"]')[0].click();
+                designer.activeRibbonTab('fill-custom');
             }
         },
         {
@@ -120,6 +121,15 @@ Intro.designerIntro = function (designer) {
             popover: {
                 title: '查看汇总数据',
                 description: '点击跳转数据汇总页面查看所有填报数据。',
+                position: 'right',
+                closeBtnText: '下一步'
+            }
+        },
+        {
+            element: '.datarepory-icon',
+            popover: {
+                title: '报表分析',
+                description: '点击跳转报表分析页面，使用报表插件分析所有数据。',
                 position: 'right',
                 closeBtnText: '下一步'
             }
@@ -150,7 +160,7 @@ Intro.customDesignIntro = function (designer) {
 
     let steps = [
         {
-            element: '.ribbon',
+            element: '.gc-designer-ribbon',
             popover: {
                 className: 'first-step-popover-class',
                 title: '模板设计',
@@ -169,7 +179,7 @@ Intro.customDesignIntro = function (designer) {
             }
         },
         {
-            element: '.right-panels',
+            element: '[data-command="fieldListTreePanel"]',
             popover: {
                 title: '数据绑定',
                 description: '根据填报需求添加填报字段，拖拽字段到单元格中设置绑定关系。<a target="_blank" href="https://www.bilibili.com/video/BV1c84y1k7FQ/?spm_id_from=333.788&vd_source=9e1edbd683c15937dd39311528998d2c">观看视频</a>',
@@ -177,6 +187,7 @@ Intro.customDesignIntro = function (designer) {
                 closeBtnText: '下一步'
             },
             callBefore: (designer) => {
+                designer.activeRibbonTab('data');
                 if(!designer.getData("FieldListVisible")){
                     GC.Spread.Sheets.Designer.getCommand(GC.Spread.Sheets.Designer.CommandNames.DesignMode).execute(designer)
                 }
@@ -191,7 +202,7 @@ Intro.customDesignIntro = function (designer) {
                 closeBtnText: '开始体验'
             },
             callBefore: () => {
-                document.querySelectorAll('[data-id="fill-custom"]')[0].click();
+                designer.activeRibbonTab('fill-custom');
             },
             callAfter: () => {
                 localStorage.setItem('idCustomerDesignIntro', true)

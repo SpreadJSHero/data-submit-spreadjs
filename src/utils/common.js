@@ -51,6 +51,12 @@ function getPreivewConfig(distributeVisible, router) {
             commandGroup: {
                 children: ["clearLocalData"]
             }
+        },
+        {
+            label: "分析",
+            commandGroup: {
+                children: ["createDataReport"]
+            }
         }]
     })
     config.commandMap = {
@@ -103,6 +109,17 @@ function getPreivewConfig(distributeVisible, router) {
             execute: function () {
                 localStorage.clear()
                 clearAll();
+            }
+        },
+        createDataReport: {
+            title: "通过报表分析汇总数据",
+            text: "报表分析",
+            iconClass: "datarepory-icon",
+            bigButton: true,
+            commandName: "createDataReport",
+            execute: function (designer) {
+                let url = `http://${window.location.host}${window.location.pathname}#/report?template=${router.currentRoute.value.query.template}`
+                window.open(url, "_blank")
             }
         },
     }
@@ -333,9 +350,26 @@ const executeSummary = async (spread, router) => {
     }
 }
 
+const getSummaryData = async (template) => {
+    return new Promise( async resolve=>{
+        if (!template) {
+            ElMessage({ message: '汇总模板不存在', type: 'error' })
+            resolve([])
+        } else {
+            let result = await getTemplateReocords(template)
+            if (result.length == 0) {
+                ElMessage({ message: '暂无汇总数据', type: 'error' })
+                resolve([])
+            } else {
+                resolve(result)
+            }
+        }
+    });
+}
+
 async function setVersion() {
     let version = await localforage.getItem("version")
-    let newVersion = "16.2.6"
+    let newVersion = "18.2.3"
     if (version != newVersion) {
         await localforage.clear()
         localforage.setItem("version", newVersion)
@@ -348,5 +382,6 @@ export {
     loadTemplate,
     initialTemplateData,
     executeSummary,
+    getSummaryData,
     setVersion
 }

@@ -26,6 +26,7 @@ declare module '@vue/runtime-core' {
     ElTable: typeof import('element-plus/es')['ElTable']
     ElTableColumn: typeof import('element-plus/es')['ElTableColumn']
     OnlineDesigner: typeof import('./components/OnlineDesigner.vue')['default']
+    Report: typeof import('./components/Report.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     SpreadDataFill: typeof import('./components/SpreadDataFill.vue')['default']

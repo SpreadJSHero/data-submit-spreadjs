@@ -18,6 +18,9 @@ const routes = [
                 path: '/summary',
                 component: () => import("../components/SummaryList.vue")
             }, {
+                path: '/report',
+                component: () => import("../components/Report.vue")
+            }, {
                 path: "/",
                 redirect: '/preview?template=financialData',
             }

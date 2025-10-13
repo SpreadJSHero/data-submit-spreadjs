@@ -1,4 +1,3 @@
-
 <template>
   <div id="designer-container"></div>
   <el-dialog v-model="distributeVisible" size="small" @opened="initUser()">
@@ -67,8 +66,8 @@ export default defineComponent({
       this.spread = this.designer.getWorkbook();
       loadTemplate(this.spread, this.router.currentRoute.value.query.template, this.designer)
       this.router.currentRoute.value.query.template === "customDesigner" ? Intro.customDesignIntro(this.designer) : Intro.designerIntro(this.designer);
-      document.querySelector('li[data-id="fill-custom"]').click()
 
+      this.designer.activeRibbonTab('fill-custom');
       // 路由监听，切换文件
       watch(
         () => this.router.currentRoute.value.query.template, async (newValue) => {
@@ -76,6 +75,7 @@ export default defineComponent({
           if (newValue == 'customDesigner') {
             Intro.customDesignIntro(this.designer)
           }
+          this.designer.activeRibbonTab('fill-custom');
         }
       )
     },
@@ -109,23 +109,23 @@ export default defineComponent({
 
 
 .distribute-icon {
-  background: url("../assets/distribute.png");
-  background-size: 35px 35px;
+  background-image: url("../assets/distribute.png");
 }
 
 .checksummary-icon {
-  background: url("../assets/summary.png");
-  background-size: 35px 35px;
+  background-image: url("../assets/summary.png");
 }
 
 .save-template-icon {
-  background: url("../assets/save.png");
-  background-size: 35px 35px;
+  background-image: url("../assets/save.png");
 }
 
 .clear-local-icon {
-  background: url("../assets/clear.png");
-  background-size: 35px 35px;
+  background-image: url("../assets/clear.png");
+}
+
+.datarepory-icon {
+  background-image: url("../assets/summary.png");
 }
 
 

@@ -40,18 +40,23 @@ const operateSteps = [
 const users = [
   {
     userId: 0,
-    userName: '张三'
-  }, {
-    userId: 1,
-    userName: '李四'
-  }, {
-    userId: 2,
-    userName: '王五'
-  }, {
-    userId: 3,
     userName: '管理员',
     isAdmin: true
-  }
+  },
+  {
+    userId: 1,
+    userName: '张三'
+  }, {
+    userId: 2,
+    userName: '李四'
+  }, {
+    userId: 3,
+    userName: '王五'
+  }, 
+  {
+    userId: 4,
+    userName: '赵六'
+  }  
 ]
 
 const initialPersonData = {

@@ -15,7 +15,7 @@
             </div>
 
             <el-menu-item v-for="item in businessType" :key=item.value :index="item.value"
-                :disabled="$route.path=='/preview' ? false : true"
+                :disabled="$route.path !=='/preview'"
             >
                 <el-icon>
                     <component :is="item.icon"></component>
@@ -58,7 +58,6 @@ export default defineComponent({
                     template: event
                 }
             })
-            document.querySelector('li[data-id="fill-custom"]').click()
         }
 
         return ({
